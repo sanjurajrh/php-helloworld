@@ -1,0 +1,171 @@
+    1  podman login hub.lab.example.com 
+    2  cat /run/user/1000/containers/auth.json 
+    3  echo "YWRtaW46cmVkaGF0" | base64 -d 
+    4  podman logout hub.lab.example.com 
+    5  cat /run/user/1000/containers/auth.json 
+    6  podman login hub.lab.example.com 
+    7  ssh servera.lab.example.com 
+    8  id
+    9  sudo ls  /etc/sudoers.d/
+   10  sudo cat /etc/sudoers.d/lab-sudo 
+   11  rpm -qa ansible-navigator 
+   12  sudo yum install ansible-navigator 
+   13  rpm -qa ansible-navigator 
+   14  whatis ansible-navigator
+   15  sudo mandb -q 
+   16  whatis ansible-navigator
+   17  ansible-navigator --help
+   18  mkdir demo 
+   19  cd demo 
+   20  vim ansible.cfg 
+   21  cat ansible.cfg 
+   22  vim inventory 
+   23  cat inventory 
+   24  ansible all --list-hosts -i inventory 
+   25  ansible-inventory 
+   26  ansible-inventory --list
+   27  vim ~/.vimrc
+   28  vim play.yaml
+   29  ansible-playbook --syntax-check play.yaml
+   30  ansible-doc  -l | grep firewall
+   31  ansible-doc  -l | grep firewalld
+   32  ansible-playbook --syntax-check play.yaml
+   33  ansible-navigator --help 
+   34  ansible-navigator doc -l  | grep firewalld
+   35  ansible-navigator doc -l 
+   36  ansible-navigator doc firewalld
+   37  podman images 
+   38  podman login hub.lab.example.com -u admin -p redhat 
+   39  ansible-navigator --eei ee-suuported-rhel8:2.0 doc -l 
+   40  ansible-navigator --eei ee-suuported-rhel8:2.0 doc firewalld
+   41  ansible-navigator --eei ee-supported-rhel8:2.0 doc firewalld
+   42  vim play.yaml 
+   43  ansible-navigator run play.yaml --eei ee-supported-rhel8:2.0 
+   44  ansible-navigator run play.yaml --eei ee-supported-rhel8:2.0 -m stdout 
+   45  vim ansible.cfg 
+   46  id devops
+   47  ansible-navigator run play.yaml --eei ee-supported-rhel8:2.0 -m stdout 
+   48  ansible-navigator run play.yaml --eei ee-supported-rhel8:2.0 
+   49  podman images 
+   50  ansible-navigator images
+   51  ansible-navigator images --eei ee-supported-rhel8:2.0 
+   52  ansible-navigator config --eei ee-supported-rhel8:2.0 
+   53  # ansible-config -- ansible-navigator config
+   54  # ansible-doc -- ansible-navigator doc
+   55  # ansible-inventory -- ansible-navigator inventory 
+   56  # ansible-playbook -- ansible-navigator run 
+   57* ansible-navigator --h
+   58  ansible-navigator collections --eei ee-supported-rhel8:2.0
+   59  ansible-navigator doc ansible.builtin.yum --eei ee-supported-rhel8:2.0
+   60  cat ansible
+   61  cat ansible.cfg 
+   62  ansible-navigator --help 
+   63  ls
+   64  less ansible-navigator.log 
+   65  ansible-navigator welcome
+   66  vimtutor 
+   67  ansible-navigator  --eei ee-suuported-rhel8:2.0 
+   68  ansible-navigator  --eei ee-supported-rhel8:2.0 
+   69  podman logi registry.redhat.io
+   70  podman login registry.redhat.io
+   71  reset
+   72  podman login registry.redhat.io
+   73  podman  search registry.redhat.io/ee
+   74  ansible-navigator  --eei ee-suuported-rhel8:2.0 
+   75  ansible-navigator  --eei ee-supported-rhel8:2.0 
+   76  ansible-navigator  --help 
+   77  ansible-navigator run  --help 
+   78  ansible-navigator run play.yaml --dry-run --eei ee-suuported-rhel8:2.0 
+   79  ansible-navigator run play.yaml --dry-run --eei ee-supported-rhel8:2.0 
+   80  ansible-navigator run play.yaml --dry-run --eei ee-supported-rhel8:2.0 -m stdout 
+   81  podman  search registry.redhat.io/ee
+   82  sudo yumlist git 
+   83  sudo yum list git 
+   84  ls -al ~/.gitconfig
+   85  sudo mandb -q 
+   86  man -k git 
+   87  man gittutorial
+   88  export 'LESS=X;
+   89  export 'LESS=X'
+   90  man gittutorial
+   91  git config --global user.name "Student User"
+   92  git config --global user.email student@workstation.lab.exmaple.com
+   93  git config --global -l 
+   94  git config -l 
+   95  cat ~/.gitconfig 
+   96  git config --global push.default simple
+   97  cat ~/.gitconfig 
+   98  git --help 
+   99  cd
+  100  git clone https://github.com/sanjurajrh/php-helloworld.git
+  101  ls
+  102  cd php-helloworld/
+  103  ls
+  104  git status 
+  105  echo "testing" > newfile.txt
+  106  git status 
+  107  git add newfile.txt 
+  108  git status 
+  109  git commit -m "Added a new file" 
+  110  git status 
+  111  git push 
+  112  vim ~/token
+  113  git branch 
+  114  unset LESS
+  115  git branch 
+  116  git branch myname
+  117  git branch 
+  118  git checkout myname
+  119  git branch 
+  120  git checkout -b ibm 
+  121  git branch 
+  122  git checkout main 
+  123  git status
+  124  git ls-files
+  125  ls
+  126  touch anotherfile.txt
+  127  ls
+  128  git ls-files
+  129  git add anotherfile.txt 
+  130  git ls-files
+  131  git log 
+  132  git checkout ibm
+  133  git log 
+  134  git show 5c2a9415b552298447b343c94467a51fb6758083
+  135  git branch 
+  136  git push --set-upstream origin ibm 
+  137  git config --global credential.helper cache
+  138  cd
+  139  cd demo/
+  140  ls
+  141  vim play2.yaml
+  142  ansible-navigator --eei ee-supported-rhel8:2.0 doc uri
+  143  vim play2.yaml
+  144  vim inventory 
+  145  ansible-navigator --eei ee-supported-rhel8:2.0 inventory --list 
+  146  ansible-navigator inventory inventory --eei ee-supported-rhel8:2.0  
+  147  ansible-navigator inventory -i inventory --eei ee-supported-rhel8:2.0  
+  148  ansible-navigator inventory -i inventory --eei ee-supported-rhel8:2.0  -m stdout 
+  149  ansible-navigator inventory -i inventory --eei ee-supported-rhel8:2.0  -m stdout --list
+  150  cat play.yaml 
+  151  cat play2.yaml 
+  152  vim play2.yaml 
+  153  cat play2.yaml 
+  154  ansible-navigator run play2.yaml --eei ee-supported-rhel8:2.0 -m stdout 
+  155  vim play2.yaml 
+  156  ansible-navigator run play2.yaml --eei ee-supported-rhel8:2.0 -m stdout 
+  157  vim play2.yaml 
+  158  ansible-navigator run play2.yaml --eei ee-supported-rhel8:2.0 -m stdout 
+  159  ssh servera -l root 
+  160  ansible-navigator run play2.yaml --eei ee-supported-rhel8:2.0 -m stdout 
+  161  vim play2.yaml 
+  162  ansible-navigator run play2.yaml --eei ee-supported-rhel8:2.0 -m stdout 
+  163  ssh servera -l root 
+  164  vim play2.yaml 
+  165  ansible-navigator run play2.yaml --eei ee-supported-rhel8:2.0 -m stdout 
+  166  vim play2.yaml 
+  167  ansible-navigator run play2.yaml --eei ee-supported-rhel8:2.0 -m stdout 
+  168  vim play2.yaml 
+  169  cd 
+  170  ls
+  171  history > history.txt 
