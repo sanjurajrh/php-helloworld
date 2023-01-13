@@ -1,0 +1,196 @@
+    1  exit
+    2  oc login -u admin -p redhat https://api.ocp4.example.com:6443 
+    3  oc get nodes --show-labels 
+    4  oc get nodes -l node-role.kubernetes.io/worker= 
+    5  oc label nodes -l node-role.kubernetes.io/worker= cluster.ocs.openshift.io/openshift-storage=
+    6  oc get nodes --show-labels 
+    7  oc whoami --show-console  
+    8  firefox $(oc whoami --show-console) & 
+    9  vim local-volume-set.yaml
+   10  oc apply -f local-volume-set.yaml
+   11  vim local-volume-set.yaml
+   12  oc get all -n openshift-local-storage 
+   13  oc get localvolumesets.local.storage.openshift.io -n openshift-local-storage
+   14  oc get localvolumediscovery -n openshift-local-storage
+   15  oc get localvolumediscoveryresults.local.storage.openshift.io -n openshift-local-storage
+   16  oc apply -f local-volume-set.yaml
+   17  oc get localvolumesets.local.storage.openshift.io  -n openshift-local-storage 
+   18  watch -d oc get localvolumesets.local.storage.openshift.io  -n openshift-local-storage 
+   19  oc get localvolumesets.local.storage.openshift.io  -n openshift-local-storage 
+   20  oc get pv 
+   21  oc get storagecluster -n openshift-storage 
+   22  oc get storagecluster,pods -n openshift-storage 
+   23  watch -d oc get storagecluster,pods -n openshift-storage 
+   24  oc get storagecluster,pods -n openshift-storage 
+   25  oc get bucketclass -n openshift-storage 
+   26  oc get storageclasses -n openshift-storage 
+   27  vim obc-registry.yaml
+   28  cat obc-registry.yaml
+   29  vim obc-registry.yaml
+   30  cat obc-registry.yaml
+   31  oc apply -f obc-registry.yaml
+   32  oc get bucketclass -n openshift-storage 
+   33  oc get objectbucketclaims.objectbucket.io  -n openshift-image-registry 
+   34  oc get secret -n openshift-image-registry
+   35  oc extract secret/noobaa-registry -n openshift-image-registry 
+   36  ls
+   37  oc create secret generic image-registry-private-configuration-user  --from-literal=REGISTRY_STORAGE_S3_ACCESSKEY=$(cat AWS_ACCESS_KEY_ID) --from-literal=REGISTRY_STORAGE_S3_SECRETKEY=$(cat AWS_SECRET_ACCESS_KEY) --namespace openshift-image-registry
+   38  oc get -n openshift-image-registry objectbucketclaim
+   39  oc get -n openshift-image-registry objectbucketclaim -o jsonpath='{.spec.bucketName}{"\n"}'
+   40  oc get -n openshift-image-registry objectbucketclaim/noobaa-registry -o jsonpath='{.spec.bucketName}{"\n"}'
+   41  oc get route/s3 -n openshift-image-registry 
+   42  oc get route 
+   43  oc get route -A | grep s3
+   44  oc get route -n openshift-storage 
+   45  oc get route/s3 -n openshift-storage 
+   46  oc get route/s3 -n openshift-storage -o jsonpath='{.spec.host}{"\n"}'
+   47  oc get -n openshift-image-registry objectbucketclaim/noobaa-registry -o jsonpath='{.spec.bucketName}{"\n"}'
+   48  oc get pods -n openshift-image-registry --show-labels 
+   49  oc edit configs.imageregistry.operator.openshift.io/cluster
+   50  oc get pods -n openshift-image-registry --show-labels 
+   51  oc get pods -n openshift-image-registry -l  docker-registry=default
+   52  oc edit configs.imageregistry.operator.openshift.io/cluster
+   53  oc get pods -n openshift-image-registry -l  docker-registry=default
+   54  history 
+   55  oc get storageclasses
+   56  oc get statefulsets.apps  -n openshift-monitoring 
+   57  oc exec -it statefulsets/prometheus-k8s -n openshift-monitoring -c prometheus -- df -h /prometheus
+   58  oc exec -it statefulsets/alertmanager-main -n openshift-monitoring -c alertmanager -- df -h /alertmanager 
+   59  vim metrics-storage.yml
+   60  cat metrics-storage.yml 
+   61  oc create -n  openshift-monitoring cm cluster-monitoring-config --from-file config.yaml=metrics-storage.yml 
+   62  oc get cm -n openshift-monitoring 
+   63  oc get statefulset -n openshift-monitoring
+   64  watch oc get statefulset -n openshift-monitoring
+   65  oc create -n  openshift-monitoring cm cluster-monitoring-config --from-file config.yaml=metrics-storage.yml 
+   66  watch oc get statefulset -n openshift-monitoring
+   67  oc edit cm/cluster-monitoring-config -n openshift-monitoring 
+   68  oc delete cm/cluster-monitoring-config -n openshift-monitoring 
+   69  vim metrics-storage.yml 
+   70  vim cm.yml
+   71  oc apply -f cm.yml 
+   72  oc get statefulset -n openshift-monitoring 
+   73  watch oc get statefulset -n openshift-monitoring 
+   74  oc exec -it statefulsets/alertmanager-main -n openshift-monitoring -c alertmanager -- df -h /alertmanager 
+   75  oc exec -it statefulsets/prometheus-k8s -n openshift-monitoring -c prometheus -- df -h /prometheus
+   76  oc new-project project1
+   77  oc create quota project1-quota --hard=persistentvolumeclaims=2 
+   78  oc get resourcequotas 
+   79  oc describe resourcequotas project1-quota 
+   80  cd Downloads/
+   81  ls
+   82  vi limitrange-mem-limit-range.yaml 
+   83  oc apply -f limitrange-mem-limit-range.yaml
+   84  cat limitrange-mem-limit-range.yaml 
+   85  oc get limitranges 
+   86  oc describe limitranges project1-limit-range 
+   87  oc create user abcd
+   88  oc policy add-role-to-user view abcd
+   89  oc get rolebinding -o wide 
+   90  oc create user xyz 
+   91  oc create role -h
+   92  oc create role create-serviceaccount --verb=create --resource=serviceaccount 
+   93  oc create rolebinding -h
+   94  oc create rolebinding create-serviceaccount-binding --role=create-serviceaccount --user=xyz 
+   95  oc get rolebinding -o wide 
+   96  oc get storageclass
+   97  oc new-project project2 
+   98  oc create quote -h
+   99  oc create quota -h
+  100  cd; oc create quota project2-quota --hard=persistentvolumeclaims=2 --dry-run=client -o yaml > project2-quota.yaml
+  101  vim project2-quota.yaml 
+  102  oc apply -f project2-quota.yaml
+  103  oc describe resourcequotas project2-quota 
+  104  oc new-project project3 
+  105  oc new-app --docker-image=registry.access.redhat.com/rhscl/postgresql-96-rhel7 -e POSTGRESQL_USER=user1 -e POSTGRESQL_PASSWORD=mypa55 -e POSTGRESQL_DATABASE=testdb
+  106  oc get pods 
+  107  oc get all
+  108  oc get pods 
+  109  oc get pods -w
+  110  oc describe deployment
+  111  oc set volumes deployment/postgresql-96-rhel7 --add --name=image-tool-pvc --type=pvc --claim-class=ocs-storagecluster-cephfs --claim-mode=ReadWriteMany --claim-name=image-tool --claim-size=1Gi -m /var/lib//pgsql/data
+  112  oc get deployment
+  113  oc get pods 
+  114  oc get pods -w
+  115  oc get pvc 
+  116  oc exec -it deployment/postgresql-96-rhel7 sh
+  117  oc edit deployment/postgresql-96-rhel7
+  118  oc new-project project4
+  119  vim pvc.yaml
+  120  oc get storageclasses.storage.k8s.io 
+  121  vim pvc.yaml 
+  122  oc get pvc 
+  123  oc apply -f pvc.yaml 
+  124  oc get pvc
+  125  pc get pv
+  126  oc get pv
+  127  oc get pvc
+  128  oc edit pvc 
+  129  oc get pvc
+  130  oc get pv
+  131  oc get pvc
+  132  oc delete pvc/myclaimpvc
+  133  oc get pvc
+  134  oc get pv
+  135  oc new-project5
+  136  oc new-project project5
+  137  vim pvc.yaml 
+  138  oc apply -f pvc.yaml 
+  139  oc get pvc
+  140  oc get pv
+  141  ls -a
+  142  gpg --list-key
+  143  ls -al 
+  144  ls .gnupg/
+  145  gpg --list-secret-keys 
+  146  ls .gnupg/
+  147  mkdir data
+  148  rsync -av .gnupg data/
+  149  ls -l data/
+  150  ls -al data/
+  151  oc create secret generic some-secret --from-file=keyfolder=data/
+  152  oc create secret generic some-secret --from-file=data/
+  153  oc extract secret/some-secret --to /tmp/
+  154  ls -al /tmp/
+  155  oc extract secret/some-secret --to /tmp/ -
+  156  oc extract secret/some-secret 
+  157  ls
+  158  ls -a .gnupg/
+  159  cd /tmp/
+  160  oc extract secret/some-secret --to .
+  161  ls 
+  162  ls -a 
+  163  ls -ltr 
+  164  date
+  165  oc get secret/some-secret -o yaml 
+  166  oc get secret 
+  167  oc delete secret/some-secret 
+  168  cd
+  169  ls 
+  170  ls -a data/
+  171  ls -a data/.gnupg/
+  172  oc create secret -h 
+  173  oc create secret generic -h
+  174  # oc create secret generic my-secret --from-file=/home/student/data
+  175  # oc create secret generic my-secret --from-file=path/to/bar
+  176  oc create secret generic my-secret --from-file=/home/student/data
+  177  oc get secret/my-secret -o yaml 
+  178  oc project
+  179  oc new-app --image=quay.io/sanjuraj_rh/mysql -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -e MYSQL_DATABASE=items 
+  180  oc new-app --docker-image=quay.io/sanjuraj_rh/mysql -e MYSQL_USER=user1 -e MYSQL_PASSWORD=mypa55 -e MYSQL_ROOT_PASSWORD=r00tpa55 -e MYSQL_DATABASE=items 
+  181  oc get pods 
+  182  oc get pods -w
+  183  oc get all
+  184  oc get pvc 
+  185  oc edit deployment/mysql 
+  186  oc get pods 
+  187  oc get pods -w
+  188  oc get pods 
+  189  oc exec -it deployment/mysql bash 
+  190  oc get pvc
+  191  oc get volumesnapshot
+  192  oc get volumecl
+  193  oc get pvc
+  194  ls
+  195  history 
+  196  history > sample1.txt
